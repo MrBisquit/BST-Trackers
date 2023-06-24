@@ -529,10 +529,6 @@ document.addEventListener("resize", (ev) => {
     AddTrackingData("resize", ev);
 });
 
-document.addEventListener("scroll", (ev) => {
-    AddTrackingData("scroll", ev);
-});
-
 document.addEventListener("search", (ev) => {
     AddTrackingData("search", ev);
 });
