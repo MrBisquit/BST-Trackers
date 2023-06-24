@@ -65,6 +65,16 @@ app.post("/config/", (req, res) => {
     res.json({ success : true });
 });
 
+app.post("/remove-all/", (req, res) => {
+    let json = JSON.parse(fs.readFileSync("./tracking_ids.json"));
+
+    json = {};
+
+    fs.writeFileSync("./tracking_ids.json", JSON.stringify(json));
+
+    res.jsonp({ success : true });
+});
+
 app.get("/data/s/:id", (req, res) => {
     res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json"))[req.params.id]);
 });

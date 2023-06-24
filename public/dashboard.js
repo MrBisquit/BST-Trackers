@@ -66,3 +66,21 @@ window.onload = async () => {
 function OpenSettings() {
     location = "/dashboard/settings/";
 }
+
+function removeAll() {
+    (async () => {
+        const rawResponse = await fetch('/remove-all/', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          //body: JSON.stringify(config)
+        });
+        const content = await rawResponse.json();
+      
+        console.log(content);
+
+        darray = [];
+      })();
+}
