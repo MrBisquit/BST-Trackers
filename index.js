@@ -44,8 +44,16 @@ app.get("/dashboard/", (req, res) => {
     res.render("dashboard.ejs");
 });
 
+app.get("/dashboard/s/:id/", (req, res) => {
+    res.render("dashboard_s.ejs", {id : req.params.id});
+});
+
 app.get("/data/", (req, res) => {
     res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json")));
+});
+
+app.get("/data/s/:id", (req, res) => {
+    res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json"))[req.params.id]);
 });
 
 function TID_exists(tid) {

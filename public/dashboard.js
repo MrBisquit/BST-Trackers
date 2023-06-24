@@ -3,9 +3,12 @@ t_enabled = false;
 
 setInterval(async () => {
     darray = Object.values(await (await fetch("/data/")).json());
+    document.getElementById("myDynamicTable").innerHTML = "";
+    addTable();
 }, 5000);
 
 function addTable() {
+    //Thanks to https://stackoverflow.com/a/30616912/16426057 for the base of this
     var myTableDiv = document.getElementById("myDynamicTable");
   
     var table = document.createElement('TABLE');
