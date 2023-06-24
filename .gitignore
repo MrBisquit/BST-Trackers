@@ -1,1 +1,3 @@
-*.json
+tracking_ids.json
+#*.json
+#*/config.json
