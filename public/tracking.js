@@ -1,6 +1,8 @@
 let array = [];
+let t_enabled = true;
 
 function AddTrackingData(type, event) {
+    if(!t_enabled) return;
     if(localStorage.getItem("_td") != null) {
         array = JSON.parse(localStorage.getItem("_td"));
     }
@@ -31,6 +33,7 @@ function ClearAll() {
 }
 
 setInterval(async () => {
+    if(!t_enabled) return;
     // Thanks to https://stackoverflow.com/a/29823632/16426057 for this!
     (async () => {
         const rawResponse = await fetch('/tracking_data/', {

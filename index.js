@@ -40,6 +40,14 @@ app.post("/tracking_data/", (req, res) => {
     res.json({ success : true, TID : req.cookies._tid});
 });
 
+app.get("/dashboard/", (req, res) => {
+    res.render("dashboard.ejs");
+});
+
+app.get("/data/", (req, res) => {
+    res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json")));
+});
+
 function TID_exists(tid) {
     let tids = JSON.parse(fs.readFileSync("./tracking_ids.json"));
     console.log(tids[tid]);
