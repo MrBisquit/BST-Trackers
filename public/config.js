@@ -53,3 +53,19 @@ function changeSetting(id) {
     config.trackers[id] = !config.trackers[id];
     loadSettings();
 }
+
+function enableAll() {
+    var keys = Object.keys(config.trackers);
+    for (let i = 0; i < keys.length; i++) {
+        config.trackers[keys[i]] = true;
+    }
+    loadSettings();
+}
+
+function disableAll() {
+    var keys = Object.keys(config.trackers);
+    for (let i = 0; i < keys.length; i++) {
+        config.trackers[keys[i]] = false;
+    }
+    loadSettings();
+}

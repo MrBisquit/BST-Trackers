@@ -1,8 +1,17 @@
 let array = [];
 let t_enabled = true;
+var config = {};
+
+window.onload = async () => {
+    config = (await (await fetch("/config/")).json());
+}
 
 function AddTrackingData(type, event) {
+    if(config.trackers[type] == undefined || config.trackers[type] == null) return;
     if(!t_enabled) return;
+    try {
+        if(!config.trackers[type]) return;
+    } catch {}
     if(localStorage.getItem("_td") != null) {
         array = JSON.parse(localStorage.getItem("_td"));
     }
