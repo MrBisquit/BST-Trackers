@@ -62,3 +62,7 @@ window.onload = async () => {
     darray = Object.values(await (await fetch("/data/")).json());
     addTable();
 }
+
+function OpenSettings() {
+    location = "/dashboard/settings/";
+}

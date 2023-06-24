@@ -44,12 +44,25 @@ app.get("/dashboard/", (req, res) => {
     res.render("dashboard.ejs");
 });
 
+app.get("/dashboard/settings/", (req, res) => {
+    res.render("dashboard_settings.ejs");
+});
+
 app.get("/dashboard/s/:id/", (req, res) => {
     res.render("dashboard_s.ejs", {id : req.params.id});
 });
 
 app.get("/data/", (req, res) => {
     res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json")));
+});
+
+app.get("/config/", (req, res) => {
+    res.jsonp(JSON.parse(fs.readFileSync("./config.json")));
+});
+
+app.post("/config/", (req, res) => {
+    fs.writeFileSync("config.json", JSON.stringify(req.body));
+    res.json({ success : true });
 });
 
 app.get("/data/s/:id", (req, res) => {
