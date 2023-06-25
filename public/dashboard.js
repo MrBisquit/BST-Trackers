@@ -84,3 +84,7 @@ function removeAll() {
         darray = [];
       })();
 }
+
+function openLiveAnalytics() {
+    location = "/dashboard/analytics/";
+}

@@ -7,9 +7,9 @@ window.onload = async () => {
 }
 
 function AddTrackingData(type, event) {
-    if(config.trackers[type] == undefined || config.trackers[type] == null) return;
     if(!t_enabled) return;
     try {
+        if(config.trackers[type] == undefined || config.trackers[type] == null) return;
         if(!config.trackers[type]) return;
     } catch {}
     if(localStorage.getItem("_td") != null) {
@@ -57,7 +57,12 @@ setInterval(async () => {
       
         console.log(content);
 
-        array = [];
+        if(!content.success) {
+            alert("Tracking session was interupted, press OK to restart session.");
+            location.reload();
+        } else {
+            array = [];
+        }
       })();
 }, 5000);
 

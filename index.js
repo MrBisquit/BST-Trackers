@@ -30,19 +30,28 @@ app.get("/", (req, res) => {
 });
 
 app.post("/tracking_data/", (req, res) => {
-    let data = {
-        data_from : moment(),
-        data : req.body
-    }
-    console.log(req.body);
-    AddTD_TID(req.cookies._tid, data);
+    try {
+        let data = {
+            data_from : moment(),
+            data : req.body
+        }
+        console.log(req.body);
+        AddTD_TID(req.cookies._tid, data);
 
-    res.json({ success : true, TID : req.cookies._tid});
+        res.json({ success : true, TID : req.cookies._tid});
+        return;
+    } catch {
+        res.json({ success : false, TID : req.cookies._tid});
+    }
 });
 
 app.get("/dashboard/", (req, res) => {
     res.render("dashboard.ejs");
 });
+
+app.get("/dashboard/analytics/", (req, res) => {
+    res.render("analytics.ejs");
+})
 
 app.get("/dashboard/settings/", (req, res) => {
     res.render("dashboard_settings.ejs");
@@ -77,6 +86,14 @@ app.post("/remove-all/", (req, res) => {
 
 app.get("/data/s/:id", (req, res) => {
     res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json"))[req.params.id]);
+});
+
+app.post("/terminate_session/:id/", (req, res) => {
+    let json = JSON.parse(fs.readFileSync("./tracking_ids.json"));
+    delete json[req.params.id];
+    fs.writeFileSync("./tracking_ids.json", JSON.stringify(json));
+
+    res.jsonp({ success : true });
 });
 
 function TID_exists(tid) {

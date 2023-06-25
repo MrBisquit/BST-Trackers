@@ -5,6 +5,8 @@ setInterval(async () => {
     darray = await (await fetch("/data/s/" + id)).json();
     document.getElementById("myDynamicTable").innerHTML = "";
     addTable();
+    document.getElementById("sca").innerHTML = darray.tracking_session_created;
+    document.getElementById("lpa").innerHTML = darray.last_ping;
 }, 5000);
 
 function addTable() {
@@ -53,4 +55,22 @@ function addTable() {
 window.onload = async () => {
     darray = await (await fetch("/data/s/" + id)).json();
     addTable();
+    document.getElementById("sca").innerHTML = darray.tracking_session_created;
+    document.getElementById("lpa").innerHTML = darray.last_ping;
+}
+
+function terminateSession() {
+    (async () => {
+        const rawResponse = await fetch('/terminate_session/' + id, {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        });
+        const content = await rawResponse.json();
+      
+        console.log(content);
+      })();
+    location = "/dashboard/";
 }
