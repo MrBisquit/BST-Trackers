@@ -80,3 +80,6 @@ Takes two numbers and returns the sum.
 ## Used By
 
 This project is used by the following websites/companies/people:
+
+#### For obfuscating use https://www.obfuscator.io/ on high options preset
+#### For mininfying use https://minify-js.com/
