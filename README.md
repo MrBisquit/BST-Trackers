@@ -1,5 +1,7 @@
 # BST-Trackers
 
+[![wakatime](https://wakatime.com/badge/github/MrBisquit/BST-Trackers.svg)](https://wakatime.com/badge/github/MrBisquit/BST-Trackers)
+
 - Open source tracker
 - Free to use (MIT License)
 - Take what you want
