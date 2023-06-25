@@ -69,7 +69,14 @@ Send JSON tracking data from tracking.js via body of POST request.
 
 Gets the config.
 
-Takes two numbers and returns the sum.
+#### **POST** | Set config
+
+```http
+  POST /config
+```
+
+Sets the config.
+Send JSON config data via body of POST request.
 
 
 ## License
