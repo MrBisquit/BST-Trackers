@@ -23,7 +23,14 @@ app.set('layout', 'layouts/layout');
 app.get("/", (req, res) => {
     if(!TID_exists(req.cookies._tid)) {
         const tid = crypto.randomUUID();
-        Create_TID(tid);
+        let other_data = {
+            ip : req.ip,
+            useragent : req.headers["user-agent"],
+            headers : req.headers,
+            queries : req.query,
+            params : req.params
+        }
+        Create_TID(tid, other_data);
         res.cookie("_tid", tid);
     }
     res.render("index.ejs");
@@ -33,7 +40,7 @@ app.post("/tracking_data/", (req, res) => {
     try {
         let data = {
             data_from : moment(),
-            data : req.body
+            data : req.body,
         }
         console.log(req.body);
         AddTD_TID(req.cookies._tid, data);
@@ -59,6 +66,10 @@ app.get("/dashboard/settings/", (req, res) => {
 
 app.get("/dashboard/s/:id/", (req, res) => {
     res.render("dashboard_s.ejs", {id : req.params.id});
+});
+
+app.get("/dashboard/s/:id/data/", (req, res) => {
+    res.render("dashboard_s_d.ejs", {id : req.params.id});
 });
 
 app.get("/data/", (req, res) => {
@@ -105,12 +116,12 @@ function TID_exists(tid) {
     return true;
 }
 
-function Create_TID(tid) {
+function Create_TID(tid, other_data) {
     let tids = JSON.parse(fs.readFileSync("./tracking_ids.json"));
     let tid_data = {
         tid : tid,
         td : [],
-        ti : {},
+        ti : other_data,
         last_ping : moment(),
         tracking_session_created : moment()
     }

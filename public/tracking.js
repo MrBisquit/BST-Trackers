@@ -16,13 +16,74 @@ function AddTrackingData(type, event) {
         array = JSON.parse(localStorage.getItem("_td"));
     }
 
-    array.push({
+    /*array.push({
         type : type,
         event : event,
         //location : location,
         //document : document,
         //window : Window
-    })
+    });*/
+
+    let ev = event;
+
+    const trackingData = {
+        // Commonly Used Properties
+        type: ev.type,
+        //target: ev.target,
+        //currentTarget: ev.currentTarget,
+        clientX: ev.clientX,
+        clientY: ev.clientY,
+        offsetX: ev.offsetX,
+        offsetY: ev.offsetY,
+        pageX: ev.pageX,
+        pageY: ev.pageY,
+        screenX: ev.screenX,
+        screenY: ev.screenY,
+        altKey: ev.altKey,
+        ctrlKey: ev.ctrlKey,
+        shiftKey: ev.shiftKey,
+        metaKey: ev.metaKey,
+        button: ev.button,
+        buttons: ev.buttons,
+        timeStamp: ev.timeStamp,
+        isTrusted: ev.isTrusted,
+
+        // Less Commonly Used Properties
+        bubbles: ev.bubbles,
+        cancelable: ev.cancelable,
+        composed: ev.composed,
+        relatedTarget: ev.relatedTarget,
+        movementX: ev.movementX,
+        movementY: ev.movementY,
+        region: ev.region,
+
+        // Internal Properties (not recommended for direct tracking)
+        eventPhase: ev.eventPhase,
+        defaultPrevented: ev.defaultPrevented,
+        returnValue: ev.returnValue,
+        //composedPath: ev.composedPath(),
+        //srcElement: ev.srcElement,
+        fromElement: ev.fromElement,
+        toElement: ev.toElement,
+        wheelDelta: ev.wheelDelta,
+        wheelDeltaX: ev.wheelDeltaX,
+        wheelDeltaY: ev.wheelDeltaY,
+        detail: ev.detail,
+        key: ev.key,
+        code: ev.code,
+        charCode: ev.charCode,
+        keyCode: ev.keyCode,
+        repeat: ev.repeat,
+        isComposing: ev.isComposing,
+        composed: ev.composed,
+        locale: ev.locale,
+        // Add more properties as needed
+    };
+
+    array.push({
+        type : type,
+        event_data : trackingData
+    });
 
     //console.log(array);
     /*console.log({

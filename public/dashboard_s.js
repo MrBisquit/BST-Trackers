@@ -42,7 +42,7 @@ function addTable() {
             var tdc1 = document.createElement("td");
             tdc1.innerHTML = darray.td[i].data[j].type;
             var tdc2 = document.createElement("td");
-            tdc2.innerHTML = JSON.stringify(darray.td[i].data[j].event);
+            tdc2.innerHTML = JSON.stringify(darray.td[i].data[j].event_data);
             tra.appendChild(tdc1);
             tra.appendChild(tdc2);
             //console.log(tra);
@@ -73,4 +73,8 @@ function terminateSession() {
         console.log(content);
       })();
     location = "/dashboard/";
+}
+
+function viewMoreData() {
+    location = `/dashboard/s/${id}/data`;
 }
