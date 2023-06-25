@@ -10,6 +10,7 @@ setInterval(async () => {
 function addTable() {
     //Thanks to https://stackoverflow.com/a/30616912/16426057 for the base of this
     var myTableDiv = document.getElementById("myDynamicTable");
+    var date = new Date();
   
     var table = document.createElement('TABLE');
     table.border = '1';
@@ -25,9 +26,12 @@ function addTable() {
     ac2.innerHTML = "Session created at";
     var ac3 = document.createElement("td");
     ac3.innerHTML = "Last ping at";
+    var ac4 = document.createElement("td");
+    ac4.innerHTML = "Active";
     atr.appendChild(ac1);
     atr.appendChild(ac2);
     atr.appendChild(ac3);
+    atr.appendChild(ac4);
     tableBody.appendChild(atr);
   
     for (var i = 0; i < darray.length; i++) {
@@ -47,6 +51,16 @@ function addTable() {
       var c3 = document.createElement("td");
       c3.innerHTML = darray[i].last_ping;
       tr.appendChild(c3);
+
+      var c4 = document.createElement("td");
+      if((date - new Date(darray[i].last_ping)) < 15*1000) {
+        c4.innerHTML = "Active";
+        tr.style.backgroundColor = "Green";
+        tr.style.color = "white";
+      } else {
+        c4.innerHTML = "Inactive";
+      }
+      tr.appendChild(c4);
   
       /*for (var j = 0; j < 4; j++) {
         var td = document.createElement('TD');

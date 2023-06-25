@@ -64,6 +64,8 @@ setInterval(async () => {
             array = [];
         }
       })();
+
+      config = (await (await fetch("/config/")).json());
 }, 5000);
 
 /*document.addEventListener("mouseenter", (ev) => {
