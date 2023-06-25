@@ -9,6 +9,7 @@ window.onload = async () => {
 function AddTrackingData(type, event) {
     if(!t_enabled) return;
     try {
+        if(config == null || config == {}) return;
         if(config.trackers[type] == undefined || config.trackers[type] == null) return;
         if(!config.trackers[type]) return;
     } catch {}
