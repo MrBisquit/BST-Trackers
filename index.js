@@ -7,6 +7,7 @@ const crypto = require("crypto");
 const moment = require("moment");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const platform = require('platform');
 
 app.use(cookieParser());
 
@@ -25,7 +26,8 @@ app.get("/", (req, res) => {
         const tid = crypto.randomUUID();
         let other_data = {
             ip : req.ip,
-            useragent : req.headers["user-agent"],
+            // useragent : req.headers["user-agent"], // Keep this just in case the one below stops working
+            useragent : platform.parse(req.headers["user-agent"]),
             headers : req.headers,
             queries : req.query,
             params : req.params
@@ -74,6 +76,10 @@ app.get("/dashboard/s/:id/data/", (req, res) => {
 
 app.get("/data/", (req, res) => {
     res.jsonp(JSON.parse(fs.readFileSync("./tracking_ids.json")));
+});
+
+app.get("/analytics/", (req, res) => {
+    res.jsonp(JSON.parse(fs.readFileSync("./statistics.json")));
 });
 
 app.get("/config/", (req, res) => {
@@ -126,17 +132,51 @@ function Create_TID(tid, other_data) {
         tracking_session_created : moment()
     }
     tids[tid] = tid_data;
-    //console.log(tids);
     fs.writeFileSync("./tracking_ids.json", JSON.stringify(tids));
 }
 
 function AddTD_TID(tid, tracking_data) {
     let tids = JSON.parse(fs.readFileSync("./tracking_ids.json"));
-    //console.log(tids);
-    //console.log(tid);
     tids[tid].td.push(tracking_data);
     tids[tid].last_ping = moment();
     fs.writeFileSync("./tracking_ids.json", JSON.stringify(tids));
 }
+
+function GatherStatistics() {
+    let tids = JSON.parse(fs.readFileSync("./tracking_ids.json"));
+    var tids_keys = Object.keys(tids);
+    var tids_values = Object.values(tids);
+
+    var analytics_all = JSON.parse(fs.readFileSync("./statistics.json"));
+    var analytics = {
+        os : {},
+        browser : {}
+    };
+    var c = moment();
+
+    for (let i = 0; i < tids_keys.length; i++) {
+        console.log(tids_keys[i]);
+        console.log(tids_values[i].ti.useragent);
+
+        if(analytics.os[tids_values[i].ti.useragent.os.family] == undefined) {
+            analytics.os[tids_values[i].ti.useragent.os.family] = 1;
+        } else {
+            analytics.os[tids_values[i].ti.useragent.os.family] += 1;
+        }
+
+        if(analytics.browser[tids_values[i].ti.useragent.name] == undefined) {
+            analytics.browser[tids_values[i].ti.useragent.name] = 1;
+        } else {
+            analytics.browser[tids_values[i].ti.useragent.name] += 1;
+        }
+    }
+
+    analytics_all[c] = analytics;
+    fs.writeFileSync("./statistics.json", JSON.stringify(analytics_all));
+}
+
+setInterval(() => {
+    GatherStatistics();
+}, 5000);
 
 app.listen(80);

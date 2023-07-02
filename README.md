@@ -24,7 +24,9 @@ BST-Tracker is an open-source modular tracker that allows you to track users on 
 To deploy this project follow these steps
 
 - Download repositiory
+- Run `npm install` to install of the dependencies
 - Add `tracking_ids.json` file with the content of `{}`
+- Add `statistics.json` file with the content of `{}`
 - Run this: 
 ```bash
   node .
@@ -82,6 +84,9 @@ Send JSON config data via body of POST request.
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+
+Platform.js is from here: https://github.com/bestiejs/platform.js/
 
 
 ## Used By
