@@ -53,4 +53,47 @@ function updateData() {
     };
       
     Plotly.newPlot('usersBrowser', data, layout);
+
+    var currently_active_array = [];
+    var currently_known_array = [];
+    for (let i = 0; i < tmp.length; i++) {
+        currently_active_array.push(tmp[i].active_sessions);
+        currently_known_array.push(tmp[i].sessions);
+    }
+
+    var trace1 = {
+        x: Object.keys(analytics),
+        y: currently_active_array,
+        type: 'scatter',
+        name : "Currently active sessions"
+    };
+      
+    var trace2 = {
+        x: Object.keys(analytics),
+        y: currently_known_array,
+        type: 'scatter',
+        name : "Current number of sessions"
+    };
+      
+    var data = [trace1, trace2];
+      
+    Plotly.newPlot('usersSessions', data);
+}
+
+function removeAll() {
+    (async () => {
+        const rawResponse = await fetch('/remove-all/', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          //body: JSON.stringify(config)
+        });
+        const content = await rawResponse.json();
+      
+        console.log(content);
+
+        darray = [];
+      })();
 }

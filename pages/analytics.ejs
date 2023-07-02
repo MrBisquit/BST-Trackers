@@ -1,14 +1,24 @@
 Tracking does not apply to this area.
 <script src="/analytics.js"></script><br>
 <script src='https://cdn.plot.ly/plotly-2.24.1.min.js'></script>
-<button onclick="history.back();">Back</button>
+<!-- <button onclick="history.back();">Back</button><button onclick="removeAll();">Remove all tracking sessions</button>  <- Old stuff, don't remove -->
+<div class="tabs">
+    <button onclick="location = '/dashboard/settings';" class="tab-btn">Settings</button>
+    <button onclick="location = '/dashboard';" class="tab-btn">Home</button>
+    <button class="tab-btn-selected">Live analytics</button>
+</div>
+
+<button onclick="removeAll();" class="btn">Remove all tracking sessions</button>
 
 <p>
     You have currently <span id="cau">-</span> users online!<br>
     With <span id="cas">-</span> sessions!
 </p>
 
-<div id="usersOS"></div>
-<div id="usersBrowser"></div>
+<div class="usersPIE" style="width: 100%; display: inline-block;">
+    <div id="usersOS" style="display:inline;float:left; height: 400;"></div>
+    <div id="usersBrowser" style="display:inline;float:left; height: 400;"></div>
+</div>
+<div id="usersSessions"></div>
 
 <div id="myDynamicTable" style="width: 100%;"></div>

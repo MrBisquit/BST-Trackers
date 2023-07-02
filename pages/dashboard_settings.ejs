@@ -2,12 +2,18 @@ Tracking does not apply to this area.
 <br>
 <script src="/config.js"></script>
 
-<button onclick="history.back();">Back</button> - <span>Viewing settings</span>
+<!-- <button onclick="history.back();">Back</button> - <span>Viewing settings</span> <- Old stuff, don't remove -->
+<div class="tabs">
+    <button class="tab-btn-selected">Settings</button>
+    <button onclick="location = '/dashboard';" class="tab-btn">Home</button>
+    <button onclick="location = '/dashboard/analytics';" class="tab-btn">Live analytics</button>
+</div>
+
 <br><br>
 
 <h3>Trackers</h3>
-<button onclick="enableAll();">Enable all</button>
-<button onclick="disableAll();">Disable all</button>
+<button onclick="enableAll();" class="btn">Enable all</button>
+<button onclick="disableAll();" class="btn">Disable all</button>
 <div id="trackers"></div>
 
 <br><br><button onclick="saveSettings();">Save settings</button>

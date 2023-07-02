@@ -150,11 +150,17 @@ function GatherStatistics() {
     var analytics_all = JSON.parse(fs.readFileSync("./statistics.json"));
     var analytics = {
         os : {},
-        browser : {}
+        browser : {},
+        sessions : tids_keys.length,
+        active_sessions : 0
     };
     var c = moment();
+    var date = new Date();
 
     for (let i = 0; i < tids_keys.length; i++) {
+        if((date - new Date(tids_values[i].last_ping)) < 15*1000) {
+            analytics.active_sessions += 1;
+        }
         console.log(tids_keys[i]);
         console.log(tids_values[i].ti.useragent);
 

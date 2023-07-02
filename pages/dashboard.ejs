@@ -1,5 +1,12 @@
 Tracking does not apply to this area.
 <script src="/dashboard.js"></script><br>
-<button onclick="OpenSettings();">Edit settings</button><button onclick="removeAll();">Remove all tracking sessions</button><button onclick="openLiveAnalytics();">Open Live Analytics</button>
+<div class="tabs">
+    <!--<button onclick="OpenSettings();" class="tab-btn-selected">Edit settings</button>
+    <button onclick="removeAll();" class="tab-btn">Remove all tracking sessions</button>
+    <button onclick="openLiveAnalytics();" class="tab-btn">Open Live Analytics</button> <- Old stuff, don't remove -->
+    <button onclick="OpenSettings();" class="tab-btn">Settings</button>
+    <button class="tab-btn-selected">Home</button>
+    <button onclick="openLiveAnalytics();" class="tab-btn">Live analytics</button>
+</div>
 
 <div id="myDynamicTable" style="width: 100%;"></div>

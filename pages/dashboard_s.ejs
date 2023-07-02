@@ -4,6 +4,20 @@ Tracking does not apply to this area.
 </script><br>
 <script src="/dashboard_s.js"></script>
 
-<button onclick="history.back();">Back</button><button onclick="terminateSession();">Terminate tracking session</button><button onclick="viewMoreData();">View more data</button> - <span>Viewing <%- id %> - Session created at: <span id="sca"></span> - Last ping at: <span id="lpa"></span></span>
+<!-- <button onclick="history.back();">Back</button><button onclick="terminateSession();">Terminate tracking session</button><button onclick="viewMoreData();">View more data</button> - <span>Viewing <%- id %> - Session created at: <span id="sca"></span> - Last ping at: <span id="lpa"></span></span> <- Old stuff, don't remove -->
+
+<div class="tabs">
+    <button onclick="location = '/dashboard/settings';" class="tab-btn">Settings</button>
+    <button onclick="location = '/dashboard/';" class="tab-btn">Home</button>
+    <button onclick="location = '/dashboard/analytics';" class="tab-btn">Live analytics</button>
+    <button class="tab-btn-selected"><%- id %></button>
+</div>
+<hr>
+<div class="tabs">
+    <button class="tab-btn-selected">Events</button>
+    <button class="tab-btn" onclick="viewMoreData();">Data</button>
+</div>
+
+<button onclick="terminateSession();" class="btn">Terminate tracking session</button>&nbsp;<span>Viewing <%- id %> - Session created at: <span id="sca"></span> - Last ping at: <span id="lpa"></span></span>
 
 <div id="myDynamicTable" style="width: 100%;"></div>
